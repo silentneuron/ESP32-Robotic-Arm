@@ -3,7 +3,7 @@ import numpy as np
 import websocket
 import json
 
-ESP32_IP = "192.168.4.1"  # Change if different as per the terminal output from arduino code
+ESP32_IP = "192.168.4.1"  # Change if different as per the terminal output from arduino code said earlier
 
 # Put the Servo angle limits
 BASE_MIN = 60
@@ -107,4 +107,5 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ws.close()
+
 
