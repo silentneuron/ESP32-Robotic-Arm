@@ -3,14 +3,14 @@ import numpy as np
 import websocket
 import json
 
-ESP32_IP = "192.168.4.1"  # Change if different
+ESP32_IP = "192.168.4.1"  # Change if different as per the terminal output from arduino code
 
-# Servo angle limits
+# Put the Servo angle limits
 BASE_MIN = 60
 BASE_MAX = 120
 FRAME_WIDTH = 640  # Width of camera frame
 
-# Fixed angles for pickup (tune later if needed)
+# Fixed angles for pickup change it as per environment
 SHOULDER_ANGLE = 100
 ELBOW_ANGLE = 80
 GRIPPER_OPEN = 90
@@ -54,7 +54,7 @@ def get_largest_contour_center(mask):
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     if contours:
         largest = max(contours, key=cv2.contourArea)
-        if cv2.contourArea(largest) > 1000:  # avoid noise
+        if cv2.contourArea(largest) > 1000:  # avoid bg noise
             M = cv2.moments(largest)
             if M["m00"] != 0:
                 cx = int(M["m10"] / M["m00"])
@@ -76,10 +76,12 @@ while True:
         break
 
     blue_mask, red_mask = detect_color(frame)
-
+   # to only get the center
     blue_center = get_largest_contour_center(blue_mask)
     red_center = get_largest_contour_center(red_mask)
-
+    
+    # the conditions change as per required
+    
     if blue_center:
         cx, cy = blue_center
         cv2.circle(frame, (cx, cy), 10, (255, 0, 0), -1)
@@ -95,7 +97,7 @@ while True:
         send_to_esp32(ws, base_angle, SHOULDER_ANGLE, ELBOW_ANGLE, GRIPPER_CLOSED)
 
     else:
-        # No object found → idle
+        # No object found stays idle
         send_to_esp32(ws, 90, SHOULDER_ANGLE, ELBOW_ANGLE, GRIPPER_OPEN)
 
     cv2.imshow("Robot Eye", frame)
@@ -105,3 +107,4 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ws.close()
+
