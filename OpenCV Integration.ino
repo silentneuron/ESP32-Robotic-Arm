@@ -1,11 +1,11 @@
-#include <ESP32Servo.h>
+u#include <ESP32Servo.h>
 
 Servo baseServo;
 Servo shoulderServo;
 Servo elbowServo;
 Servo gripServo;
 
-// Define servo pins (adjust as needed)
+// Define servo pins adjust as per ur need
 int basePin = 27;
 int shoulderPin = 25;
 int elbowPin = 26;
@@ -42,7 +42,7 @@ void loop() {
   }
 }
 
-// Below are the motion functions
+// when laptop cam detects that certain colour it moves to the coordinates given u can change it too
 
 void moveArmToRed() {
   baseServo.write(90);
