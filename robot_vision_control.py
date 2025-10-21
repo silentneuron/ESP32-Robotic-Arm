@@ -2,14 +2,14 @@ import cv2, math, time, serial
 import numpy as np
 
 # Arduino serial port
-arduino = serial.Serial('COM5', 115200, timeout=1)  # Adjust COM if needed
-time.sleep(2)  # wait for Arduino to reset
+arduino = serial.Serial('COM5', 115200, timeout=1)  # Adjust COM port
+time.sleep(2)  # wait for esp32 to reset
 
 FRAME_WIDTH, FRAME_HEIGHT = 640, 480
 LINK1, LINK2 = 100, 100
 GRIPPER_OPEN, GRIPPER_CLOSED = 90, 30
 
-def inverse_kinematics(x, y):
+def inverse_kinematics(x, y):# The Math part
     dx = x - FRAME_WIDTH//2
     dy = FRAME_HEIGHT - y
     dist = min(math.hypot(dx, dy), LINK1+LINK2-1)
@@ -28,7 +28,7 @@ def send_angles(s,e,g):
     print("[SEND]", cmd.strip())
     time.sleep(0.5)
 
-def detect_color_center(frame, lower, upper):
+def detect_color_center(frame, lower, upper):# Colour part
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, lower, upper)
     cnts,_ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -59,6 +59,7 @@ while True:
         red_center=detect_color_center(frame,(170,120,70),(180,255,255))
     blue_center=detect_color_center(frame,(100,150,0),(140,255,255))
 
+    # Conditions
     if red_center:
         targets["red"]=red_center
         cv2.circle(frame,red_center,8,(0,0,255),-1)
@@ -83,3 +84,4 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
