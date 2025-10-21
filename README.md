@@ -61,8 +61,8 @@ A low-cost 3-DOF robotic arm powered by the **ESP32**, designed for **web-based 
 | **Elbow**    | Bend       | D25 (GPIO25)       | +5V | GND |
 | **Gripper**  | Open/Close | D14 (GPIO14)       | +5V | GND |
 
-  -+5 pins can also be connected to power supply too
-  -ESP32 conect to a powerbank
+  +5 pins can also be connected to power supply too.
+  ESP32 conect to a powerbank
 
 ### **Software**
 - Arduino IDE   
