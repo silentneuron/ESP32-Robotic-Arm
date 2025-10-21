@@ -6,6 +6,8 @@ Servo elbowServo;
 Servo gripServo;
 
 // Define servo pins adjust as per ur need
+
+
 int basePin = 27;
 int shoulderPin = 25;
 int elbowPin = 26;
