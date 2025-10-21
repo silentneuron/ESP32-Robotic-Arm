@@ -51,7 +51,18 @@ A low-cost 3-DOF robotic arm powered by the **ESP32**, designed for **web-based 
 - Jumper wires and arm chassis
 - Could buy here https://robu.in/product/pro-range-esp32-robotic-arm-with-web-control-kit/
 - Laptop cam or a web cam
-  
+
+  ##  Wiring Connections
+
+| Servo    | Function   | Signal Pin (ESP32) | Power   | Ground |
+|-----------|-------------|--------------------|---------|--------|
+| **Base**     | Rotation   | D33 (GPIO33)       | +5V | GND |
+| **Shoulder** | Up/Down    | D27 (GPIO27)       | +5V | GND |
+| **Elbow**    | Bend       | D25 (GPIO25)       | +5V | GND |
+| **Gripper**  | Open/Close | D14 (GPIO14)       | +5V | GND |
+
+-+5 pins can also be connected to power supply too
+-ESP32 conect to a powerbank
 
 ### **Software**
 - Arduino IDE   
