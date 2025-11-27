@@ -106,4 +106,4 @@ A low-cost 3-DOF robotic arm powered by the **ESP32**, designed for **web-based 
 ##  Author
 
 **Silent_neuron**  
-_"If it moves, automate it."_ 
+
